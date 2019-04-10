@@ -18,7 +18,7 @@ window.onload = function(){
     setResult(result);
 }
 function rollDice(id){
-    let value = randomValue(5);
+    let value = randomValue(6);
     let randomDiceSrc = getDicePath(value);
     document.querySelector(id + " .random-dices__dice--image").src = randomDiceSrc;
     return value;
