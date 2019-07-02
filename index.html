@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!--Diz pro navegador que a acentuação vai ser em UTF-8-->
     <meta charset="UTF-8">
+    <!--Adapta o visual pra dispositivos móveis-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Título do site-->
     <title>Random Dices Game</title>
+    <!--Faz um link pro arquivo de estilo (CSS - visual do site)-->
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <!--Abre uma seção-->
     <section class="random-dices">
+        <!--Cada DIV representa uma divisória. É como se fosse uma pasta de elementos-->
         <div class="random-dices__title">
+            <!--Os elementos h1, h2, h3, h4, h5 e h6 representam um título-->
             <h1 class="random-dices__title--text">RANDOM DICES</h1>
         </div>
         <div class="random-dices__container">
             <div id="dice2" class="random-dices__dice">
+                <!--Uma imagem com caminho vazio. O caminho da imagem vai ser adicionado via javascript-->
                 <img class="random-dices__dice--image" src="" />
             </div>
             <div id="dice1" class="random-dices__dice">
+                <!--Uma imagem com caminho vazio. O caminho da imagem vai ser adicionado via javascript-->
                 <img class="random-dices__dice--image" src="" />
             </div>
         </div>
         <div class="random-dices__response">
+            <!--Resultado do jogo. Tambem adicionado via javascript, por isso vazio no início-->
             <h3 class="random-dices__response--text"></h3>
         </div>
         <div class="random-dices__help">
             <h5 class="random-dices__help--text">Refresh the page to roll dices.</h3>
         </div>
     </section>
+    <!--Essa é a tag que vai fazer o link pro arquivo de javascript-->
     <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
