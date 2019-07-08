@@ -1,44 +1,90 @@
-window.onload = function(){
-    //criam-se duas variáveis com o ID de cada dado
-    let dice1ID = "#dice1";
-    let dice2ID = "#dice2";
+var $ = document.querySelector.bind(document);
 
-    //"rola o dado" e recebe o valor desse dado
-    let value1 = rollDice(dice1ID);
-    let value2 = rollDice(dice2ID);
+class RollingDices {
 
-    let result = "";
-    //caso o valor do dado 1 seja maior, o dado 1 ganha
-    if(value1 < value2){
-        result = "Dice 1 wins";
+    constructor(){
+        this.diceA = {
+            element: $("#diceA")
+                .classList.add("random-dices__dice--image"),
+            value: 1,
+            image: document.createElement("img")
+        }
+
+        this.diceB = {
+            element: $("#diceB")
+                .classList.add("random-dices__dice--image"),
+            value: 1,
+            image: document.createElement("img")
+        } 
+
+        this._result = $(".random-dices__response--text");
     }
-    //caso o valor do dado 2 seja maior, o dado 2 ganha
-    else if(value1 > value2){
-        result = "Dice 2 wins";
+
+    init() {
+        this.throwDices();
+        this.updateDices();
+
+        this.showResult(
+            this.getResult()
+        );
+
+        this.updateDOM();
     }
-    //caso o valor seja o mesmo, então empate
-    else if(value1 == value2){
-        result = "Draw";
+
+    updateDices() {
+        this.showUniqueDice(this.diceA);
+        this.showUniqueDice(this.diceB);
     }
-    //e no final, o resultado é inserido no HTML
-    setResult(result);
+
+    showUniqueDice(dice){       
+        dice.image = this.getDiceImage(    
+            dice.image, this.getDicePath(dice.value)
+        );
+    }
+
+    updateDOM(){
+        $("#diceA").appendChild(this.diceA.image);
+        $("#diceB").appendChild(this.diceB.image);
+    }
+
+    getDiceImage(diceImage, diceImagePath){
+        diceImage.setAttribute("src", diceImagePath);
+        
+        return diceImage;
+    }
+
+    throwDices(){
+        this.throwUniqueDice(this.diceA);
+        this.throwUniqueDice(this.diceB);
+    }
+
+    throwUniqueDice(dice){
+        dice.value = this.getRandomValue(6);
+    }
+
+    getResult(){
+        if(this.diceA.value < this.diceB.value){
+            return "Dice 1 wins";
+        }
+        else if(this.diceA.value > this.diceB.value){
+            return "Dice 2 wins";
+        }
+        return "Draw";
+    } 
+
+    getRandomValue(max) {
+        return Math.floor(Math.random() * max) + 1; 
+    }
+    
+    getDicePath(number){
+        return "img/" + number + ".svg";
+    }
+
+    showResult(result){
+        this._result.innerHTML = result;
+    }
 }
-function rollDice(id){
-    //retorna um número aleatório de 1 a 6
-    let value = randomValue(6);
-    //retorna o caminho da imagem já com o número escolhido
-    let randomDiceSrc = getDicePath(value);
-    //insere a imagem no HTML    
-    document.querySelector(id + " .random-dices__dice--image").src = randomDiceSrc;
-    //e retorna o valor pra conferir o resultado
-    return value;
-}
-function randomValue(max){
-    return Math.floor(Math.random() * max) + 1; 
-}
-function getDicePath(number){
-    return randomDiceSrc = "img/" + number + ".svg";
-}
-function setResult(result){
-    document.querySelector(".random-dices__response--text").innerHTML = result;
-}
+
+const game = new RollingDices();
+game.init();
+
